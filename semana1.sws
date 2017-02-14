@@ -1,0 +1,112 @@
+{{{id=1|
+float(pi)
+///
+3.141592653589793
+}}}
+
+{{{id=2|
+CC
+///
+Complex Field with 53 bits of precision
+}}}
+
+{{{id=3|
+C=ComplexField(100)
+C
+///
+Complex Field with 100 bits of precision
+}}}
+
+{{{id=4|
+z=C(1,5)
+z
+///
+1.0000000000000000000000000000 + 5.0000000000000000000000000000*I
+}}}
+
+{{{id=5|
+w=C(1+5*I)
+w
+///
+1.0000000000000000000000000000 + 5.0000000000000000000000000000*I
+}}}
+
+{{{id=6|
+print w.real()
+print w.imag()
+print w.norm()
+print w.arg()
+///
+1.0000000000000000000000000000
+5.0000000000000000000000000000
+26.000000000000000000000000000
+1.3734007669450158608612719264
+}}}
+
+{{{id=7|
+print tan(w.arg())
+print tan(w)
+///
+5.0000000000000000000000000000
+0.000082567198342295960462462187559 + 1.0000377833796007077365156478*I
+}}}
+
+{{{id=8|
+print exp(w)
+print exp(CC(I*pi))+1
+///
+0.77107376416566749164076758811 - 2.6066264306850797407954382423*I
+1.22464679914735e-16*I
+}}}
+
+{{{id=9|
+w=CC(5*exp(1.25*I))
+print w
+print w.arg()
+print log(w)
+print w.conjugate()
+///
+1.57661181197634 + 4.74492309677793*I
+1.25000000000000
+1.60943791243410 + 1.25000000000000*I
+1.57661181197634 - 4.74492309677793*I
+}}}
+
+<p>definir una simetr&iacute;a con respecto a la recta que pasa por el punto (2,0) y tiene una inclinaci&oacute;n de 0.3 radiantes con respecto al eje de coordenadas usando n&uacute;meros complejos</p>
+
+{{{id=10|
+t=CC(2)
+g=CC((RR(0.3)*I).exp())
+def S(w):
+    return (((w-t)*g**(-1)).conjugate())*g+t
+///
+}}}
+
+{{{id=11|
+print S(w)
+print S(CC(2))
+///
+4.32974776292592 - 4.15521697547027*I
+2.00000000000000
+}}}
+
+<p>definir un movimiento r&iacute;gido que consista en un giro con respecto al punto (3,2) y un &aacute;ngulo de pi/6 radiantes y despu&eacute;s una simetr&iacute;a con la recta que pasa por el punto (2,0) y forma un &aacute;ngulo de 90 grados con respecto al eje de coordenadas usando n&uacute;meros complejos</p>
+
+{{{id=14|
+def S(z,p,theta):
+    g=CC(I*theta).exp()
+    return ((z-p)*g**(-1).conjugate())*g+p
+
+def G(z,theta,p):
+    return (z-p)*CC(I+theta).exp()+p
+
+def SG(z):
+    return S(G(z,pi/6,CC(3,2)),CC(2,0),pi)
+///
+}}}
+
+{{{id=13|
+SG(CC(1,2))
+///
+1.17584022132722 - 0.840960530309762*I
+}}}
