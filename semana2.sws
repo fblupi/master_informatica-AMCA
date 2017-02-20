@@ -1,0 +1,91 @@
+{{{id=1|
+H.<ii,jj,kk>=QuaternionAlgebra(RR,-1,-1)
+///
+}}}
+
+{{{id=2|
+H
+///
+Quaternion Algebra (-1.00000000000000, -1.00000000000000) with base ring Real Field with 53 bits of precision
+}}}
+
+{{{id=3|
+z=H(0.18-3.12*ii+1.014*jj+0.5*kk); z
+///
+0.180000000000000 - 3.12000000000000*ii + 1.01400000000000*jj + 0.500000000000000*kk
+}}}
+
+{{{id=4|
+z=H([0.18,-3.12,1.014,0.5]); z
+///
+0.180000000000000 - 3.12000000000000*ii + 1.01400000000000*jj + 0.500000000000000*kk
+}}}
+
+{{{id=7|
+z.reduced_norm()
+z.conjugate()
+///
+0.180000000000000 + 3.12000000000000*ii - 1.01400000000000*jj - 0.500000000000000*kk
+}}}
+
+{{{id=5|
+z*z.conjugate() - z.reduced_norm()
+///
+-1.11022302462516e-16*ii - 2.22044604925031e-16*kk
+}}}
+
+{{{id=6|
+def parte_real(z):
+    return (z+z.conjugate())/2
+///
+}}}
+
+{{{id=8|
+parte_real(z)
+///
+0.180000000000000
+}}}
+
+{{{id=9|
+def parte_vectorial(z):
+    return (z-z.conjugate())/2 
+    # return z-parte_real(z)
+///
+}}}
+
+{{{id=10|
+parte_vectorial(z)
+///
+-3.12000000000000*ii + 1.01400000000000*jj + 0.500000000000000*kk
+}}}
+
+{{{id=11|
+z.reduced_trace() - (z+z.conjugate())
+///
+0
+}}}
+
+<p>EJERCICIOS</p>
+<p>crear una funci&oacute;n traslaci&oacute;n de un vector</p>
+<p>crear una funci&oacute;n de giro de un &aacute;ngulo theta con respecto a un vector u</p>
+<p>crear una funci&oacute;n de simetr&iacute;a con respecto a un plano cualquiera</p>
+
+{{{id=12|
+def T(v,w):
+    return v+w
+///
+}}}
+
+{{{id=14|
+def G(v,u,theta):
+    q=cos(theta/2)+sin(theta/2)*(u/u.reduced_norm())
+    inv=cos(theta/2)-sin(theta/2)*(u/u.reduced_norm())
+    return q*v*inv
+///
+}}}
+
+{{{id=15|
+def S(v,n,p):
+    return T(-G(T(v,-p),n,RR(pi)),p)
+///
+}}}
